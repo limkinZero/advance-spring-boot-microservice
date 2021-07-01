@@ -5,11 +5,12 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/spring_rest?createDatabaseIfNotExist=true
-    username: [username]
-    password: [password]
-    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:h2:file:./target/data/authdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
     initialization-mode: always
+    continue-on-error: true
   jpa:
     hibernate:
       ddl-auto: update
@@ -20,6 +21,7 @@ spring:
         show_sql: true
         format_sql: true
     generate-ddl: true
+    open-in-view: true
   application:
     name: auth-server
 

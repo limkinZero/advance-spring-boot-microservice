@@ -9,7 +9,7 @@ create table if not exists  oauth_client_details (
   authorized_grant_types varchar(1024) default null,
   authorities varchar(1024) default null,
   additional_information varchar(4096) default null,
-  autoapprove varchar(255) default null,
+  auto_approve varchar(255) default null,
   primary key (client_id)
 );
 
@@ -17,14 +17,14 @@ create table if not exists  permission (
   id int(11) not null auto_increment,
   name varchar(512) default null,
   primary key (id),
-  unique key name (name)
+  unique key permission_name (name)
 ) ;
 
 create table if not exists role (
   id int(11) not null auto_increment,
   name varchar(255) default null,
   primary key (id),
-  unique key name (name)
+  unique key role_name (name)
 ) ;
 
 create table if not exists  user (
@@ -43,17 +43,13 @@ create table if not exists  user (
 create table  if not exists permission_role (
   permission_id int(11) default null,
   role_id int(11) default null,
-  key permission_id (permission_id),
-  key role_id (role_id),
-  constraint permission_role_ibfk_1 foreign key (permission_id) references permission (id),
-  constraint permission_role_ibfk_2 foreign key (role_id) references role (id)
+  foreign key (permission_id) references permission(id),
+  foreign key (role_id) references role(id)
 );
 
 create table if not exists role_user (
   role_id int(11) default null,
   user_id int(11) default null,
-  key role_id (role_id),
-  key user_id (user_id),
-  constraint role_user_ibfk_1 foreign key (role_id) references role (id),
-  constraint role_user_ibfk_2 foreign key (user_id) references user (id)
+  foreign key (role_id) references role(id),
+  foreign key (user_id) references user(id)
 );
