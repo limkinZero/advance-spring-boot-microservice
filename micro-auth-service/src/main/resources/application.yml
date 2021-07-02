@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:file:./target/data/authdb
+    url: jdbc:h2:file:./target/data/authdb;AUTO_SERVER=TRUE
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -25,7 +25,6 @@ spring:
   application:
     name: auth-server
 
-
 eureka:
   client:
     service-url:
@@ -40,11 +39,20 @@ management:
         include: -*
         exclude: env,beans
 
+security:
+  oauth2:
+    server:
+      token-url: http://localhost:9191/auth-api/oauth/token
+    client:
+      client-id: mobile
+      client-secret: pin
+
 logging:
   file: /app/log/auth.log
   level:
-    root: WARN
+    root: INFO
     org.springframework.web: DEBUG
     org.hibernate: ERROR
     org.springframework: INFO
+    org.springframework.security: DEBUG
     

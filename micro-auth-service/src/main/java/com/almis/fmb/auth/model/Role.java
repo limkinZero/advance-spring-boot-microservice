@@ -1,4 +1,4 @@
-package com.ahasan.auth.model;
+package com.almis.fmb.auth.model;
 
 
 import javax.persistence.*;

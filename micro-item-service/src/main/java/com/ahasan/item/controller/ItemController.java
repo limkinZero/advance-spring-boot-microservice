@@ -1,31 +1,25 @@
 package com.ahasan.item.controller;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-
 import com.ahasan.item.common.messages.BaseResponse;
 import com.ahasan.item.dto.ItemDTO;
 import com.ahasan.item.dto.SalesDTO;
 import com.ahasan.item.service.ItemService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Validated
 @RestController
 @RequestMapping("/item")
+@Slf4j
 public class ItemController {
 
 	@Autowired
@@ -37,19 +31,20 @@ public class ItemController {
 	@GetMapping(value = "/find")
 	public ResponseEntity<List<ItemDTO>> getAllItems() {
 		List<ItemDTO> list = itemService.findItemList();
-		return new ResponseEntity<List<ItemDTO>>(list, HttpStatus.OK);
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/find/by-id")
 	public ResponseEntity<ItemDTO> getItemById(@RequestParam Long id) {
-		ItemDTO list = new ItemDTO();
+		new ItemDTO();
+		ItemDTO list;
 		SalesDTO salesDTO = new SalesDTO();
 		try {
 			String url = "http://sales-server/sales-api/sales/find/name/by-id?id=" + id;
 			ResponseEntity<SalesDTO> response = restTemplate.getForEntity(url, SalesDTO.class);
 			salesDTO = response.getBody();
 		} catch (Exception e) {
-			System.out.println(e);
+			log.error("Error:", e);
 		}
 		list = itemService.findByProductId(id);
 		list.setSales(salesDTO.getPrice());
@@ -63,6 +58,7 @@ public class ItemController {
 	}
 
 	@DeleteMapping(value = "/delete/{id}")
+	@PreAuthorize("#oauth2.hasScope('WRITE') and hasAuthority('delete_profile')")
 	public ResponseEntity<BaseResponse> deleteItemById(@PathVariable("id") Long id) {
 		BaseResponse response = itemService.deleteItemById(id);
 		return new ResponseEntity<>(response, HttpStatus.OK);

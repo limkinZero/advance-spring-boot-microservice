@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-    private static final String RESOURCE_ID = "microservice";
+    private static final String RESOURCE_ID = "payment";
     private static final String SECURED_READ_SCOPE = "#oauth2.hasScope('READ')";
     private static final String SECURED_WRITE_SCOPE = "#oauth2.hasScope('WRITE')";
     private static final String SECURED_PATTERN = "/**";

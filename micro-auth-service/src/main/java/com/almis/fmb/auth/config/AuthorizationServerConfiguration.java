@@ -1,4 +1,4 @@
-package com.ahasan.auth.config;
+package com.almis.fmb.auth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -39,7 +39,7 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
     }
 
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+    public void configure(AuthorizationServerSecurityConfigurer security) {
         security.checkTokenAccess("isAuthenticated()").tokenKeyAccess("permitAll()");
 
     }
@@ -51,7 +51,7 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.tokenStore(jdbcTokenStore());
         endpoints.authenticationManager(authenticationManager);
     }
@@ -65,7 +65,7 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(new CorsFilter(source));
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
     }

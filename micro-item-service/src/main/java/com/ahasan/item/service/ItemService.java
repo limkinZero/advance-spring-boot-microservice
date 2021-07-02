@@ -1,15 +1,5 @@
 package com.ahasan.item.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.transaction.Transactional;
-
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-
 import com.ahasan.item.common.exceptions.RecordNotFoundException;
 import com.ahasan.item.common.messages.BaseResponse;
 import com.ahasan.item.common.messages.CustomMessage;
@@ -17,13 +7,25 @@ import com.ahasan.item.common.utils.Topic;
 import com.ahasan.item.dto.ItemDTO;
 import com.ahasan.item.entity.ItemEntity;
 import com.ahasan.item.repo.ItemRepo;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class ItemService {
 
+	private final ItemRepo itemRepo;
+
 	@Autowired
-	private ItemRepo itemRepo;
+	public ItemService(ItemRepo itemRepo) {
+		this.itemRepo = itemRepo;
+	}
 
 	public List<ItemDTO> findItemList() {
 		return itemRepo.findAll().stream().map(this::copyItemEntityToDto).collect(Collectors.toList());

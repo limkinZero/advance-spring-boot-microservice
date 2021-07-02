@@ -1,4 +1,4 @@
-package com.ahasan.auth.model;
+package com.almis.fmb.auth.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class User implements Serializable {
+public class UserEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,18 +33,18 @@ public class User implements Serializable {
 					@JoinColumn(name = "role_id", referencedColumnName = "id") })
 	private List<Role> roles;
 
-	public User() {
+	public UserEntity() {
 	}
 
-	public User(User user) {
-		this.username = user.getUsername();
-		this.password = user.getPassword();
-		this.email = user.getEmail();
-		this.enabled = user.isEnabled();
-		this.accountNonExpired = user.isAccountNonExpired();
-		this.credentialsNonExpired = user.isCredentialsNonExpired();
-		this.accountNonLocked = user.isAccountNonLocked();
-		this.roles = user.getRoles();
+	public UserEntity(UserEntity userEntity) {
+		this.username = userEntity.getUsername();
+		this.password = userEntity.getPassword();
+		this.email = userEntity.getEmail();
+		this.enabled = userEntity.isEnabled();
+		this.accountNonExpired = userEntity.isAccountNonExpired();
+		this.credentialsNonExpired = userEntity.isCredentialsNonExpired();
+		this.accountNonLocked = userEntity.isAccountNonLocked();
+		this.roles = userEntity.getRoles();
 	}
 
 	public Integer getId() {
