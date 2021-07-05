@@ -1,10 +1,15 @@
-package com.almis.fmb.auth.model;
+package com.almis.fmb.auth.entity;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "user")
 public class UserEntity implements Serializable {
 
@@ -33,9 +38,6 @@ public class UserEntity implements Serializable {
 					@JoinColumn(name = "role_id", referencedColumnName = "id") })
 	private List<Role> roles;
 
-	public UserEntity() {
-	}
-
 	public UserEntity(UserEntity userEntity) {
 		this.username = userEntity.getUsername();
 		this.password = userEntity.getPassword();
@@ -46,77 +48,4 @@ public class UserEntity implements Serializable {
 		this.accountNonLocked = userEntity.isAccountNonLocked();
 		this.roles = userEntity.getRoles();
 	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public boolean isAccountNonExpired() {
-		return accountNonExpired;
-	}
-
-	public void setAccountNonExpired(boolean accountNonExpired) {
-		this.accountNonExpired = accountNonExpired;
-	}
-
-	public boolean isCredentialsNonExpired() {
-		return credentialsNonExpired;
-	}
-
-	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-		this.credentialsNonExpired = credentialsNonExpired;
-	}
-
-	public boolean isAccountNonLocked() {
-		return accountNonLocked;
-	}
-
-	public void setAccountNonLocked(boolean accountNonLocked) {
-		this.accountNonLocked = accountNonLocked;
-	}
-
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
 }

@@ -34,7 +34,7 @@ create table if not exists oauth_refresh_token
 
 create table if not exists permission
 (
-    id  int(11) not null auto_increment PRIMARY KEY,
+    id   int(11) not null auto_increment PRIMARY KEY,
     name varchar(512) default null,
     unique key permission_name (name)
 );
@@ -47,16 +47,16 @@ create table if not exists role
     unique key role_name (name)
 );
 
-create table if not exists userEntity
+create table if not exists user
 (
     id                    int(11)       not null auto_increment,
     username              varchar(100)  not null,
     password              varchar(1024) not null,
-    email                 varchar(1024) not null,
-    enabled               tinyint(4)    not null,
-    accountNonExpired     tinyint(4)    not null,
-    credentialsNonExpired tinyint(4)    not null,
-    accountNonLocked      tinyint(4)    not null,
+    email                 varchar(1024),
+    enabled               tinyint(4) default true,
+    accountNonExpired     tinyint(4) default true,
+    credentialsNonExpired tinyint(4) default true,
+    accountNonLocked      tinyint(4) default true,
     primary key (id),
     unique key username (username)
 );
@@ -74,5 +74,5 @@ create table if not exists role_user
     role_id int(11) default null,
     user_id int(11) default null,
     foreign key (role_id) references role (id),
-    foreign key (user_id) references userEntity (id)
+    foreign key (user_id) references user (id)
 );

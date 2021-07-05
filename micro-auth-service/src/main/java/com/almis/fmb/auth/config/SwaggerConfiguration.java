@@ -15,7 +15,6 @@ import springfox.documentation.swagger.web.ApiKeyVehicle;
 import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class SwaggerConfiguration {
             .apis(RequestHandlerSelectors.basePackage("com.almis.fmb.auth.controller"))
             .paths(PathSelectors.any()).build()
             .securityContexts(Collections.singletonList(securityContext()))
-            .securitySchemes(Arrays.asList(securitySchema())).apiInfo(apiInfo());
+            .securitySchemes(Collections.singletonList(securitySchema())).apiInfo(apiInfo());
   }
 
 

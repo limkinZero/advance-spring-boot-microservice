@@ -1,4 +1,4 @@
-package com.almis.fmb.auth.model;
+package com.almis.fmb.auth.entity;
 
 
 import lombok.Data;

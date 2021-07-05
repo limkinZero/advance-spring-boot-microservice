@@ -22,19 +22,19 @@ import javax.sql.DataSource;
 @Configuration
 public class AuthorizationServerConfiguration implements AuthorizationServerConfigurer {
 
-    
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    
-    @Autowired
-    private DataSource dataSource;
-    
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
+    private final DataSource dataSource;
+    private final AuthenticationManager authenticationManager;
 
+    @Autowired
+    public AuthorizationServerConfiguration(PasswordEncoder passwordEncoder, DataSource dataSource, AuthenticationManager authenticationManager) {
+        this.passwordEncoder = passwordEncoder;
+        this.dataSource = dataSource;
+        this.authenticationManager = authenticationManager;
+    }
 
     @Bean
-    TokenStore jdbcTokenStore() {
+    TokenStore jdbcTokenStore(DataSource dataSource) {
         return new JdbcTokenStore(dataSource);
     }
 
@@ -52,7 +52,7 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.tokenStore(jdbcTokenStore());
+        endpoints.tokenStore(jdbcTokenStore(dataSource));
         endpoints.authenticationManager(authenticationManager);
     }
     

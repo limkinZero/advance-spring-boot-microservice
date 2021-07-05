@@ -1,4 +1,4 @@
-package com.almis.fmb.auth.model;
+package com.almis.fmb.auth.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

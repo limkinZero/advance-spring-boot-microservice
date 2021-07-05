@@ -1,7 +1,7 @@
 package com.almis.fmb.auth.service;
 
-import com.almis.fmb.auth.model.AuthUserDetail;
-import com.almis.fmb.auth.model.UserEntity;
+import com.almis.fmb.auth.entity.AuthUserDetail;
+import com.almis.fmb.auth.entity.UserEntity;
 import com.almis.fmb.auth.repository.UserDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
