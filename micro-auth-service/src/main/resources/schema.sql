@@ -53,10 +53,10 @@ create table if not exists user
     username              varchar(100)  not null,
     password              varchar(1024) not null,
     email                 varchar(1024),
-    enabled               tinyint(4) default true,
-    accountNonExpired     tinyint(4) default true,
-    credentialsNonExpired tinyint(4) default true,
-    accountNonLocked      tinyint(4) default true,
+    enabled               boolean not null,
+    accountNonExpired     boolean not null,
+    credentialsNonExpired boolean not null,
+    accountNonLocked      boolean not null,
     primary key (id),
     unique key username (username)
 );

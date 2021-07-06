@@ -30,9 +30,8 @@ public class SwaggerConfiguration {
   @Value("${security.oauth2.client.client-secret}")
   private String clientSecret;
 
-  @Value("${security.oauth2.server.token-url}")
+  @Value("${security.oauth2.resource.token-info-uri}")
   private String tokenUrl;
-
 
   /**
    *

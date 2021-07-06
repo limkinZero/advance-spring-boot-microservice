@@ -16,20 +16,19 @@ public class UserEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-
-	@Column(name = "username")
+	@Column(name = "username", nullable = false)
 	private String username;
-	@Column(name = "password")
+	@Column(name = "password", nullable = false)
 	private String password;
 	@Column(name = "email")
 	private String email;
-	@Column(name = "enabled")
+	@Column(name = "enabled", nullable = false, columnDefinition = "boolean default 1")
 	private boolean enabled;
-	@Column(name = "accountNonExpired")
+	@Column(name = "accountNonExpired", nullable = false, columnDefinition = "boolean default 1")
 	private boolean accountNonExpired;
-	@Column(name = "credentialsNonExpired")
+	@Column(name = "credentialsNonExpired", nullable = false, columnDefinition = "boolean default 1")
 	private boolean credentialsNonExpired;
-	@Column(name = "accountNonLocked")
+	@Column(name = "accountNonLocked", nullable = false, columnDefinition = "boolean default 1")
 	private boolean accountNonLocked;
 
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -39,6 +38,7 @@ public class UserEntity implements Serializable {
 	private List<Role> roles;
 
 	public UserEntity(UserEntity userEntity) {
+		this.id = userEntity.getId();
 		this.username = userEntity.getUsername();
 		this.password = userEntity.getPassword();
 		this.email = userEntity.getEmail();
