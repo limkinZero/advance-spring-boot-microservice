@@ -66,8 +66,11 @@ public class UserService {
     return new BaseResponse("User has been saved successfully", HttpStatus.CREATED.value());
   }
 
+  @Transactional
   public BaseResponse deleteUser(Integer userId) {
-    userRepository.deleteById(userId);
+    if (userRepository.findById(userId).isPresent()) {
+      userRepository.deleteById(userId);
+    } else throw new ElementNotFoundException("Delete error. User not found");
     return new BaseResponse("User has been deleted successfully", HttpStatus.OK.value());
   }
 

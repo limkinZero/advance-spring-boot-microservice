@@ -14,7 +14,7 @@ import java.util.List;
 public class UserEntity implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column(name = "username", nullable = false)
 	private String username;
@@ -24,9 +24,9 @@ public class UserEntity implements Serializable {
 	private String email;
 	@Column(name = "enabled", nullable = false, columnDefinition = "boolean default 1")
 	private boolean enabled;
-	@Column(name = "accountNonExpired", nullable = false, columnDefinition = "boolean default 1")
+	@Column(name = "accountNonExpired", nullable = false, columnDefinition = "boolean default true")
 	private boolean accountNonExpired;
-	@Column(name = "credentialsNonExpired", nullable = false, columnDefinition = "boolean default 1")
+	@Column(name = "credentialsNonExpired", nullable = false, columnDefinition = "boolean default true")
 	private boolean credentialsNonExpired;
 	@Column(name = "accountNonLocked", nullable = false, columnDefinition = "boolean default 1")
 	private boolean accountNonLocked;

@@ -18,6 +18,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
   private static final String SECURED_READ_SCOPE = "#oauth2.hasScope('READ')";
   private static final String SECURED_WRITE_SCOPE = "#oauth2.hasScope('WRITE')";
   private static final String SECURED_PATTERN = "/**";
+  private static final String[] ALLOW_PATTERN = new String[]{"/actuator/**", "/h2-console/**"};
 
   @Override
   public void configure(ResourceServerSecurityConfigurer resources) {
@@ -30,7 +31,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
             .headers().frameOptions().disable() //H2 console
             .and().sessionManagement().disable()
             .authorizeRequests()
-            .antMatchers("/actuator/**", "/h2-console/**").permitAll()
+            .antMatchers(ALLOW_PATTERN).permitAll()
             .and().requestMatchers().antMatchers(SECURED_PATTERN)
             .and().authorizeRequests()
             .antMatchers(HttpMethod.POST, SECURED_PATTERN)
