@@ -460,13 +460,12 @@ Gateway Server is an application that transmit all API to desire services. every
 
 Let's start by configuring hystrix monitoring dashboard on API Gateway Service application to view hystrix stream.
 
-First, we need to add the `spring-cloud-starter-hystrix-dashboard` dependency:
+First, we need to add the `spring-cloud-starter-netflix-hystrix-dashboard` dependency:
 
 ```
 <dependency>
-	<groupId>org.springframework.cloud</groupId>
-	<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
-	<version>1.4.7.RELEASE</version>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
 </dependency>
 ```
 
@@ -528,7 +527,7 @@ zuul.thread-pool.use-separate-thread-pools=true
 
 
 
-* Now view **hystrix stream** in dashboard – `http://localhost:8180/hystrix.stream`
+* Now view **hystrix stream** in dashboard – `http://localhost:8180/actuator/hystrix.stream`
 
 ![Screenshot from 2020-12-07 12-04-26](https://user-images.githubusercontent.com/31319842/101317913-9c5dcc80-3889-11eb-8cc1-c757788dfbbd.png)
 

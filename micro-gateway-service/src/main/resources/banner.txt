@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+   ____       _                                                 _
+  / ___| __ _| |_ _____      ____ _ _   _   ___  ___ _ ____   _(_) ___ ___
+ | |  _ / _` | __/ _ \ \ /\ / / _` | | | | / __|/ _ \ '__\ \ / / |/ __/ _ \
+ | |_| | (_| | ||  __/\ V  V / (_| | |_| | \__ \  __/ |   \ V /| | (_|  __/
+  \____|\__,_|\__\___| \_/\_/ \__,_|\__, | |___/\___|_|    \_/ |_|\___\___|
+                                    |___/
+----------------------------------------------------------------------------
+${AnsiColor.GREEN} :: Application Name:     ${AnsiColor.DEFAULT} :: ${application.title}
+${AnsiColor.GREEN} :: Application Version:  ${AnsiColor.DEFAULT} :: ${application.version}
+${AnsiColor.BLUE} :: Spring Boot:          ${AnsiColor.DEFAULT} :: ${spring-boot.formatted-version}
