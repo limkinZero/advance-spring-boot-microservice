@@ -1,7 +1,9 @@
 package com.almis.gateway.filters;
 
 import com.netflix.zuul.ZuulFilter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class PostFilter extends ZuulFilter {
 
   @Override
@@ -21,8 +23,7 @@ public class PostFilter extends ZuulFilter {
 
   @Override
   public Object run() {
-   System.out.println("Inside Response Filter");
-
+   log.info("Inside Post Filter");
     return null;
   }
 
